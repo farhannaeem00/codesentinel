@@ -1,0 +1,50 @@
+from datetime import datetime
+
+def scan_schema(scan) -> dict:
+    return {
+        "id":             str(scan["_id"]),
+        "user_id":        str(scan["user_id"]),
+        "repo_url":       scan["repo_url"],
+        "repo_name":      scan.get("repo_name", ""),
+        "status":         scan["status"],
+        "overall_score":  scan.get("overall_score"),
+        "risk_level":     scan.get("risk_level", ""),
+        "summary":        scan.get("summary", ""),
+        "total_issues":   scan.get("total_issues", 0),
+        "critical_count": scan.get("critical_count", 0),
+        "high_count":     scan.get("high_count", 0),
+        "medium_count":   scan.get("medium_count", 0),
+        "low_count":      scan.get("low_count", 0),
+        "total_files":    scan.get("total_files", 0),
+        "total_lines":    scan.get("total_lines", 0),
+        "languages":      scan.get("languages", {}),
+        "files":          scan.get("files", []),
+        "top_vulnerable": scan.get("top_vulnerable", []),
+        "critical_issues":scan.get("critical_issues", []),
+        "error_message":  scan.get("error_message", ""),
+        "created_at":     str(scan.get("created_at", "")),
+    }
+
+def create_scan_document(user_id, repo_url: str) -> dict:
+    return {
+        "user_id":        user_id,
+        "repo_url":       repo_url,
+        "repo_name":      "",
+        "status":         "scanning",
+        "overall_score":  None,
+        "risk_level":     "",
+        "summary":        "",
+        "total_issues":   0,
+        "critical_count": 0,
+        "high_count":     0,
+        "medium_count":   0,
+        "low_count":      0,
+        "total_files":    0,
+        "total_lines":    0,
+        "languages":      {},
+        "files":          [],
+        "top_vulnerable": [],
+        "critical_issues":[],
+        "error_message":  "",
+        "created_at":     datetime.utcnow(),
+    }
