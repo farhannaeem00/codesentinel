@@ -10,6 +10,9 @@ import {
 import toast from 'react-hot-toast';
 import { GitBranch } from 'lucide-react';
 
+import usePageTitle from '../hooks/usePageTitle';
+ 
+
 const AlertTriangle = TriangleAlert;
 
 const ScoreBadge = ({ score, riskLevel }) => {
@@ -48,6 +51,7 @@ export default function Dashboard() {
   const [scans, setScans]     = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate              = useNavigate();
+   usePageTitle('Dashboard');
 
   useEffect(() => { fetchScans(); }, []);
 

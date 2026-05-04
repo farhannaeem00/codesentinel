@@ -3,7 +3,9 @@ import {
   Shield, Code, TriangleAlert, CheckCircle,
   ArrowRight, GitBranch, Zap, Lock
 } from 'lucide-react';
+import usePageTitle from '../hooks/usePageTitle';
 
+  
 const AlertTriangle = TriangleAlert;
 
 const FeatureCard = ({ icon, title, description }) => (
@@ -24,6 +26,7 @@ const StatCard = ({ value, label }) => (
 );
 
 export default function Landing() {
+  usePageTitle('AI Code Security Scanner');
   return (
     <div className="min-h-screen bg-gray-950 text-white">
 

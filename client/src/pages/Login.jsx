@@ -3,12 +3,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Shield, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import usePageTitle from '../hooks/usePageTitle';
+
+  
+  // ... rest of component
 
 export default function Login() {
   const [form, setForm]         = useState({ email: '', password: '' });
   const [showPassword, setShow] = useState(false);
   const [loading, setLoading]   = useState(false);
   const { login }               = useAuth();
+  usePageTitle('Sign In');
   const navigate                = useNavigate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });

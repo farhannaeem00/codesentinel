@@ -8,6 +8,9 @@ import {
 } from 'lucide-react';
 import { GitBranch } from 'lucide-react';
 
+import usePageTitle from '../hooks/usePageTitle';
+  
+  // ... rest of component
 const AlertTriangle = TriangleAlert;
 
 // ── Risk Config ───────────────────────────────────────
@@ -102,6 +105,7 @@ const ErrorState = ({ message }) => (
 
 // ── Main Report Page ──────────────────────────────────
 export default function Report() {
+  usePageTitle('Security Report');
   const { id }                    = useParams();
   const [scan, setScan]           = useState(null);
   const [loading, setLoading]     = useState(true);
