@@ -8,6 +8,7 @@ import Register  from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Scan      from './pages/Scan';
 import Report    from './pages/Report';
+import NotFound  from './pages/NotFound';
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -47,10 +48,10 @@ export default function App() {
         <Route path="/"         element={<Landing />} />
         <Route path="/login"    element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-        <Route path="/scan"      element={<PrivateRoute><Scan /></PrivateRoute>} />
+        <Route path="/dashboard"  element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/scan"       element={<PrivateRoute><Scan /></PrivateRoute>} />
         <Route path="/report/:id" element={<PrivateRoute><Report /></PrivateRoute>} />
-        <Route path="*"          element={<Navigate to="/" replace />} />
+        <Route path="*"           element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
