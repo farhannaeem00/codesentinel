@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import SkeletonCard from '../components/SkeletonCard';
 import api from '../utils/api';
 import {
   Shield, Plus, Trash2, TriangleAlert,
@@ -152,10 +153,10 @@ export default function Dashboard() {
 
         {/* ── Scans List ── */}
         {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="flex flex-col gap-3">
+            {[1, 2, 3].map(i => <SkeletonCard key={i} />)}
           </div>
-        ) : scans.length === 0 ? (
+        ) : scans.length === 0 ? ( (
           <div className="bg-gray-900 rounded-2xl border border-gray-800 p-16 text-center">
             <Code size={48} className="mx-auto text-gray-700 mb-4" />
             <h3 className="font-semibold text-gray-300 mb-2">No scans yet</h3>
