@@ -156,7 +156,7 @@ export default function Dashboard() {
           <div className="flex flex-col gap-3">
             {[1, 2, 3].map(i => <SkeletonCard key={i} />)}
           </div>
-        ) : scans.length === 0 ? ( (
+        ) : scans.length === 0 ? ( 
           <div className="bg-gray-900 rounded-2xl border border-gray-800 p-16 text-center">
             <Code size={48} className="mx-auto text-gray-700 mb-4" />
             <h3 className="font-semibold text-gray-300 mb-2">No scans yet</h3>
