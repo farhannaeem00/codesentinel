@@ -30,24 +30,16 @@ if client_url:
 
 origins = list(set(origins))
 
-# If CLIENT_URL is not set or is "*", use allow_origin_regex to allow all origins
-# dynamically. This avoids Starlette's AssertionError: "Allow origins list cannot contain '*' if credentials are allowed."
-if not client_url or client_url == "*":
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origin_regex="https?://.*",
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-else:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+# Allow explicit origins plus any localhost or *.vercel.app subdomains (including branch/preview deployments)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_origin_regex=r"https?://(localhost|.*\.vercel\.app)(:\d+)?",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 # ── Health Check ──────────────────────────────────────
