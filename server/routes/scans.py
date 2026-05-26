@@ -11,11 +11,11 @@ from middleware.auth import get_current_user
 router = APIRouter(prefix="/api/scans", tags=["Scans"])
 
 @router.post("/")
-def create_scan(
+async def create_scan(
     data:         StartScanRequest,
     current_user: dict = Depends(get_current_user)
 ):
-    return start_scan(data, current_user)
+    return await start_scan(data, current_user)
 
 @router.get("/")
 def list_scans(current_user: dict = Depends(get_current_user)):

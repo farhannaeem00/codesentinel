@@ -14,7 +14,7 @@ class StartScanRequest(BaseModel):
     repo_url: str
 
 # ── Start Scan ────────────────────────────────────────
-def start_scan(data: StartScanRequest, current_user: dict):
+async def start_scan(data: StartScanRequest, current_user: dict):
     if not data.repo_url:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
