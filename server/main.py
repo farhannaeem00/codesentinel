@@ -15,18 +15,40 @@ app = FastAPI(
 )
 
 # ── CORS ──────────────────────────────────────────────
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        os.getenv("CLIENT_URL", "*"),
-        "https://codesentinelclient.vercel.app",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+client_url = os.getenv("CLIENT_URL")
+origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://codesentinelclient.vercel.app",
+]
+
+if client_url:
+    for url in client_url.split(","):
+        url = url.strip()
+        if url and url != "*":
+            origins.append(url)
+
+origins = list(set(origins))
+
+# If CLIENT_URL is not set or is "*", use allow_origin_regex to allow all origins
+# dynamically. This avoids Starlette's AssertionError: "Allow origins list cannot contain '*' if credentials are allowed."
+if not client_url or client_url == "*":
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origin_regex="https?://.*",
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+else:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
 
 # ── Health Check ──────────────────────────────────────
 @app.get("/")
