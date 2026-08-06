@@ -33,9 +33,8 @@ origins = list(set(origins))
 # Allow explicit origins plus any localhost or *.vercel.app subdomains (including branch/preview deployments)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_origin_regex=r"https?://(localhost|.*\.vercel\.app)(:\d+)?",
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
